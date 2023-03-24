@@ -1,38 +1,163 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap");
+body {
+    font-family: "Montserrat";
+    background-color: #fff5d7;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+/*                      Header part              */
+
+.wrapper.nine {
+    display: flex;
+    justify-content: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.rotate span {
+    font-size: 3rem;
+    color: #2d545e;
+    display: inline-flex;
+    animation: rotate 3s infinite;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.rotate .a {
+    color: #c7af6b;
 }
 
-.App-link {
-  color: #61dafb;
+@keyframes rotate {
+    0%,
+    75% {
+        transform: rotateY(360deg);
+    }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nine span:nth-of-type(1) {
+    animation-delay: 0.2s;
+}
+
+.nine span:nth-of-type(2) {
+    animation-delay: 0.4s;
+}
+
+.nine span:nth-of-type(3) {
+    animation-delay: 0.6s;
+}
+
+.nine span:nth-of-type(4) {
+    animation-delay: 0.8s;
+}
+
+.nine span:nth-of-type(5) {
+    animation-delay: 1s;
+}
+
+.nine span:nth-of-type(6) {
+    animation-delay: 1.2s;
+}
+
+.header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+.notes--title {
+    color: #fff;
+    font-size: 38px;
+    font-family: "Montserrat";
+    font-weight: 400;
+}
+
+.notes {
+    max-width: 1200px;
+    margin: 40px auto;
+    color: whitesmoke;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+}
+
+@media screen and (max-width: 900px) {
+    .notes {
+        grid-template-columns: repeat(2, minmax(300px, 1fr));
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .notes {
+        grid-template-columns: repeat(1, minmax(300px, 1fr));
+    }
+}
+
+
+/*                      NOTE SECTION      */
+
+.note {
+    background-color: #325f6b;
+    border-radius: 10px;
+    padding: 1rem;
+    min-height: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    white-space: pre-wrap;
+    color: whitesmoke;
+}
+
+.note.new {
+    background-color: #e5cd88;
+    color: rgb(42, 40, 40);
+}
+
+.note--footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.note textarea {
+    white-space: pre-wrap;
+    background: transparent;
+    border: none;
+    resize: none;
+    font-size: 18px;
+    color: rgb(74, 72, 72);
+}
+
+.note textarea:focus {
+    outline: none;
+}
+
+.note textarea::placeholder {
+    color: rgb(74, 72, 72)
+}
+
+.note--save {
+    background-color: #325f6b;
+    transition: 0.1s ease-in-out;
+    border: 1.5px solid #fff;
+    border-radius: 10px;
+    color: white;
+    padding: 4px 10px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.note--save:hover {
+    background: #538796;
+    border: 1.5px solid #fff;
+}
+
+.note--delete {
+    cursor: pointer;
+}
+
+.note--delete:hover {
+    transform: scale(1.1);
+}
+
+.char--progress {
+    background-color: #fff!important;
 }

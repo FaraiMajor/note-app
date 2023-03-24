@@ -1,23 +1,41 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import CreateNote from './components/CreateNote';
+import Note from './components/Note';
+import Header from './components/Header';
+import { nanoid } from 'nanoid';
 
 function App() {
+
+  const [notes, setNotes] = useState([])
+  const [inputText, setInputText] = useState('')
+
+  // handles change of state everytime a user is typing
+  function noteText(event) {
+    setInputText(event.target.value);
+  }
+
+  function saveNote() {
+
+
+  }
+
+  function deleteNote(id) {
+
+  }
+
+  const noteEl = notes.map(note =>
+    <Note
+
+    />
+  )
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <div className="notes" >
+        {noteEl}
+        <CreateNote noteText={noteText} saveNote={saveNote} inputText={inputText} />
+      </div>
     </div>
   );
 }
