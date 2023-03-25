@@ -11,8 +11,8 @@ export default function CreateNote({ noteText, saveNote, inputText }) {
                 rows="6"
                 placeholder="Type note...."
                 maxLength="150"
-                value={inputText}
-                onChange={noteText}
+                value={inputText}  //controls state and makes sure we can type new note
+                onChange={noteText} // changes state when typings
             >
             </textarea>
             <div className="note--footer">
