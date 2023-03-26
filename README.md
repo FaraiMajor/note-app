@@ -3,7 +3,7 @@
 Manage personal tasks with notes app. Has the ability to add, edit,search and delete notes. 
 ### :camera: Screenshot
 
-![screenshot](/src/images/notesapp.gif)
+![screenshot](src/images/noteapp.gif)
 
 ## :hammer: Technologies & Tool
 

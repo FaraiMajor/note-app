@@ -8,6 +8,7 @@ import { nanoid } from 'nanoid';
 
 function App() {
 
+  // get notes straight from local host by setting our state to it
   const [notes, setNotes] = useState(() => JSON.parse(localStorage.getItem("Notes")) || [])
   const [inputText, setInputText] = useState('')
   const [searchText, setSearchText] = useState('');
@@ -18,12 +19,12 @@ function App() {
   }
 
   function saveNote() {
-    const date = new Date()
+    const date = new Date();
     setNotes(prevNote => [
       ...prevNote, {
         id: nanoid(),
         text: inputText,
-        date: date.toLocaleDateString
+        date: date.toLocaleDateString(),
       }
     ])
 
