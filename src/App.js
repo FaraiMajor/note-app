@@ -8,7 +8,7 @@ import { nanoid } from 'nanoid';
 
 function App() {
 
-  const [notes, setNotes] = useState([])
+  const [notes, setNotes] = useState(() => JSON.parse(localStorage.getItem("Notes")) || [])
   const [inputText, setInputText] = useState('')
   const [searchText, setSearchText] = useState('');
 
@@ -37,6 +37,18 @@ function App() {
     setNotes(deletedNote)
 
   }
+  // get the saved notes and add them to the array
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("Notes"));
+    if (data) {
+      setNotes(data);
+    }
+  }, []);
+
+  //saving data to local storage
+  useEffect(() => {
+    localStorage.setItem("Notes", JSON.stringify(notes));
+  }, [notes]);
 
   // filter off and notes from the search using searchText state
   const noteEl = notes.filter(note => note.text.toLowerCase().includes(searchText)).map(note =>
