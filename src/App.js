@@ -12,24 +12,45 @@ function App() {
   const [notes, setNotes] = useState(() => JSON.parse(localStorage.getItem("Notes")) || [])
   const [inputText, setInputText] = useState('')
   const [searchText, setSearchText] = useState('');
+  const [editNoteId, setEditNoteId] = useState('');
 
   // handles change of state everytime a user is typing
   function noteText(event) {
     setInputText(event.target.value);
   }
 
+  // modify the saveNote function to handle both creating a new note and editing an
+  //  existing note. You can check if the editNoteId state is not an empty string, 
+  // and if so, update the note with the corresponding id. Otherwise, create a new note.
   function saveNote() {
-    const date = new Date();
-    setNotes(prevNote => [
-      ...prevNote, {
-        id: nanoid(),
-        text: inputText,
-        date: date.toLocaleDateString(),
-      }
-    ])
+    const newdate = new Date().toLocaleDateString();
 
-    setInputText("")
+    if (editNoteId) {
+      const updatedNotes = notes.map(note => {
+        if (note.id === editNoteId) {
+          return {
+            ...note,
+            text: inputText,
+            date: newdate,
+          };
+        } else {
+          return note;
+        }
+      });
 
+      setNotes(updatedNotes);
+      setEditNoteId('');
+    } else {
+      setNotes(prevNote => [
+        ...prevNote, {
+          id: nanoid(),
+          text: inputText,
+          date: newdate,
+        }
+      ]);
+    }
+
+    setInputText('');
   }
 
   // delete note by id by filter method
@@ -38,6 +59,7 @@ function App() {
     setNotes(deletedNote)
 
   }
+
   // get the saved notes and add them to the array
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("Notes"));
@@ -54,7 +76,11 @@ function App() {
   // filter off and notes from the search using searchText state
   const noteEl = notes.filter(note => note.text.toLowerCase().includes(searchText)).map(note =>
     <Note
-      text={note.text} date={note.date} deleteNote={() => deleteNote(note.id)}
+      text={note.text}
+      date={note.date}
+      deleteNote={() => deleteNote(note.id)}
+      editNote={() => setEditNoteId(note.id)} //when edit note is clicked we update editNoteId state. this is the same ID we will use in createNote
+
     />
   )
   return (
@@ -63,7 +89,12 @@ function App() {
       <Search handleSearchNote={setSearchText} />
       <div className="notes" >
         {noteEl}
-        <CreateNote noteText={noteText} saveNote={saveNote} inputText={inputText} />
+        <CreateNote
+          noteText={noteText}
+          saveNote={saveNote}
+          inputText={inputText}
+          editNoteId={editNoteId} //pass id to createNote 
+        />
       </div>
     </div>
   );
