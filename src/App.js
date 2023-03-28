@@ -10,7 +10,7 @@ function App() {
 
   // get notes straight from local host by setting our state to it
   const [notes, setNotes] = useState(() => JSON.parse(localStorage.getItem("Notes")) || [])
-  const [inputText, setInputText] = useState('')
+  const [inputText, setInputText] = useState('') //handle state for input text area
   const [searchText, setSearchText] = useState('');
   const [editNoteId, setEditNoteId] = useState('');
 
@@ -31,7 +31,7 @@ function App() {
           return {
             ...note,
             text: inputText,
-            date: newdate,
+            date: `last edited on : ${newdate}`,
           };
         } else {
           return note;
@@ -75,11 +75,15 @@ function App() {
 
   // filter off and notes from the search using searchText state
   const noteEl = notes.filter(note => note.text.toLowerCase().includes(searchText)).map(note =>
-    <Note
-      text={note.text}
+    <
+      Note text={note.text}
       date={note.date}
-      deleteNote={() => deleteNote(note.id)}
-      editNote={() => setEditNoteId(note.id)} //when edit note is clicked we update editNoteId state. this is the same ID we will use in createNote
+      deleteNote={
+        () => deleteNote(note.id)
+      }
+      editNote={
+        () => setEditNoteId(note.id)
+      } //when edit note is clicked we update editNoteId state. this is the same ID we will use in createNote
 
     />
   )
@@ -89,13 +93,12 @@ function App() {
       <Search handleSearchNote={setSearchText} />
       <div className="notes" >
         {noteEl}
-        <CreateNote
-          noteText={noteText}
+        <CreateNote noteText={noteText}
           saveNote={saveNote}
           inputText={inputText}
           editNoteId={editNoteId} //pass id to createNote 
         />
-      </div>
+      </div >
     </div>
   );
 }

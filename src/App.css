@@ -160,6 +160,14 @@ body {
     transform: scale(1.1);
 }
 
+.note--edit {
+    cursor: pointer;
+}
+
+.note--edit:hover {
+    transform: scale(1.1);
+}
+
 .char--progress {
     background-color: #fff!important;
 }
